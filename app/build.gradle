@@ -1,0 +1,58 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+def apiProperties = new Properties()
+def apiPropertiesFile = rootProject.file('api.properties')
+if (apiPropertiesFile.exists()) {
+    apiProperties.load(new FileInputStream(apiPropertiesFile))
+}
+
+
+android {
+    compileSdkVersion 28
+    defaultConfig {
+        applicationId "com.iamnagaraj.myapplication"
+        minSdkVersion 21
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField "String", "BASE_URL", apiProperties['base_url']
+        buildConfigField "String", "API_KEY", apiProperties['api_key']
+        buildConfigField "String", "SEARCH_PATH", apiProperties['search_path']
+        buildConfigField "String", "SEARCH_QUERY", apiProperties['search_query']
+        buildConfigField "String", "PAGE_COUNT", apiProperties['page_count']
+        buildConfigField "String", "PER_PAGE", apiProperties['per_page']
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'androidx.appcompat:appcompat:1.0.2'
+    implementation 'androidx.core:core-ktx:1.0.2'
+    implementation 'com.google.android.material:material:1.0.0'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation 'androidx.recyclerview:recyclerview:1.0.0'
+    implementation 'com.squareup.retrofit2:retrofit:2.6.1'
+    implementation 'com.squareup.retrofit2:converter-gson:2.6.1'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.6.1'
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.11'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
+    implementation 'com.squareup.picasso:picasso:2.71828'
+}

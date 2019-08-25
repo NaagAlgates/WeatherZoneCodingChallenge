@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">WeatherZone Coding Challenge</string>
+    <string name="action_settings">Settings</string>
+    <string name="no_result_found">No Results Found</string>
+    <string name="photo_by">Photo By</string>
+    <string name="photos_by_pexel">Photos by Pexel</string>
+    <string name="enter_search_query">Enter search query</string>
+</resources>
